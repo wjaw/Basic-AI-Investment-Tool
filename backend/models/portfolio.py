@@ -12,3 +12,6 @@ class Holding(BaseModel):
 class Portfolio(BaseModel):
     name: str
     holdings: list[Holding]
+
+class PortfolioResponse(Portfolio):
+    id: int

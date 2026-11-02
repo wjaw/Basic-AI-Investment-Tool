@@ -2,13 +2,16 @@ from sqlalchemy import ForeignKey, String, Float
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from database import Base
 
+# Database model representing an investment portfolio
 class PortfolioDB(Base):
     __tablename__ = "portfolios"
 
+    # Unique ID for each portfolio and name supplied by user
     id: Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[str] = mapped_column(String(100), nullable=False)
 
-    holding: Mapped[list["HoldingsDB"]] = relationship(
+    # Each portfolio can have multiple holdings
+    holdings: Mapped[list["HoldingsDB"]] = relationship(
         back_populates="portfolio",
         cascade=("all", "delete-orphan")
     )
